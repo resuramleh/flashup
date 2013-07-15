@@ -5,10 +5,10 @@ var express = require('express')
 
 app.use(express.logger());
 
-var data = new Buffer(fs.readFileSync('index.html'));
+var data = fs.readFileSync("index.html", 'utf-8'));
 
 app.get('/', function(req, res) {
-    res.send(data.toString('utf-8'));
+    res.send(data);
 });
 
 app.listen(port, function() {
