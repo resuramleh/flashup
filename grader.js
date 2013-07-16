@@ -22,9 +22,9 @@ var checkUrlContent=function(url,checks) {
  if (data instanceof Error) {
   console.log('Error: ' + data.message);
  } else {
-    var checkJson=checkHtmlFile(data,checks);
-    var outJson=JSON.stringify(checkJson,null,4);
-         console.log(outJson);
+    var checkJson = checkHtmlFile(data,checks);
+    var outJson = JSON.stringify(checkJson,null,4);
+    console.log(outJson);
  }
  });
 }
