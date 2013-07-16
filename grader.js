@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
 var fs = require('fs');
-var program=require('commander');
-var cheerio=require('cheerio');
-var HTMLFILE_DEFAULT="index.html";
-var CHECKSFILE_DEFAULT="checks.json";
+var program = require('commander');
+var cheerio = require('cheerio');
+var HTMLFILE_DEFAULT = "index.html";
+var CHECKSFILE_DEFAULT = "checks.json";
 
 var assertFileExists=function(infile) {
- var instr=infile.toString();
+ var instr = infile.toString();
  if(!fs.existsSync(instr)) {
-  console.log("%s does not exist.Exiting.",instr);
+  console.log("%s does not exist. Exiting.", instr);
   process.exit(1);
  }
  return instr;
@@ -23,8 +23,8 @@ var loadChecks=function(checksfile) {
  return JSON.parse(fs.readFileSync(checksfile));
 };
 
-var checkHTMLFile=function(htmlfile, checksfile) {
- $=cheerioHtmlFile(htmlfile);
+var checkHtmlFile=function(htmlfile, checksfile) {
+ $ = cheerioHtmlFile(htmlfile);
  var checks=loadChecks(checksfile).sort();
  var out={};
  for(var ii in checks) {
@@ -35,7 +35,7 @@ var checkHTMLFile=function(htmlfile, checksfile) {
 };
 
 
-if(require.main==module) {
+if(require.main == module) {
  program
   .option('-c, --checks ','Path to checks.json',assertFileExists, CHECKSFILE_DEFAULT)
   .option('-f, --file ','Path to index.html',assertFileExists, HTMLFILE_DEFAULT)
