@@ -4,23 +4,23 @@ var fs = require('fs');
 var program = require('commander');
 var cheerio = require('cheerio');
 var restler = require('restler');
-var HTMLFILE_DEFAULT = "index.html";
-var CHECKSFILE_DEFAULT = "checks.json";
+var HTMLFILE_DEFAULT = 'index.html';
+var CHECKSFILE_DEFAULT = 'checks.json';
 
 var assertFileExists = function(infile) {
  var instr = infile.toString();
  if (!fs.existsSync(instr)) {
-  console.log("%s does not exist. Exiting.", instr);
-  process.exit(1);
+ console.log("%s does not exist. Exiting.", instr);
+ process.exit(1);
  }
  return instr;
-};
+}
 
 var checkUrlContent = function(url,checks) {
  console.log('Checking url ' + url);
  restler.get(url).on('complete',function(data) {
  if (data instanceof Error) {
-  console.log('Error: ' + data.message);
+     console.log('Error: ' + data.message);
  } else {
      var checkJson = checkHtmlFile(data,checks);
      var outJson = JSON.stringify(checkJson,null,4);
