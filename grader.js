@@ -10,11 +10,11 @@ var CHECKSFILE_DEFAULT = 'checks.json';
 var assertFileExists = function(infile) {
  var instr = infile.toString();
  if (!fs.existsSync(instr)) {
- console.log("%s does not exist. Exiting.", instr);
- process.exit(1);
+  console.log("%s does not exist. Exiting.", instr);
+  process.exit(1);
  }
  return instr;
-}
+};
 
 var checkUrlContent = function(url,checks) {
  console.log('Checking url ' + url);
@@ -27,16 +27,16 @@ var checkUrlContent = function(url,checks) {
      console.log(outJson);
  }
  });
-}
+};
 
 
 var cheerioHtmlFile = function(data) {
  return cheerio.load(data);
-}
+};
 
 var loadChecks = function(checksfile) {
  return JSON.parse(fs.readFileSync(checksfile));
-}
+};
 
 var checkHtmlFile = function(htmlfile,checksfile) {
  $ = cheerioHtmlFile(htmlfile);
@@ -47,11 +47,11 @@ var checkHtmlFile = function(htmlfile,checksfile) {
   out[checks[ii]]=present;
  }
  return out;
-}
+};
 
 var clone = function(fn) {
  return fn.bind({});
-}
+};
 
 
 if (require.main == module) {
@@ -59,8 +59,8 @@ if (require.main == module) {
   .option('-c, --checks <check_file>','Path to checks.json',clone(assertFileExists), CHECKSFILE_DEFAULT)
   .option('-u, --url <url>','URL to check')
   .parse(process.argv);
-  console.log(program.url);
-  checkUrlContent(program.url, program.checks);
+ console.log(program.url);
+ checkUrlContent(program.url, program.checks);
 } else {
-   exports.checkHtmlFile = checkHtmlFile;
+  exports.checkHtmlFile = checkHtmlFile;
 }
